@@ -1,0 +1,211 @@
+    .sky span:nth-child(6) { left: 73%; top: 47%; font-size: 14px; animation-delay: -6s; }
+    .sky span:nth-child(7) { left: 28%; top: 40%; font-size: 13px; animation-delay: -2.5s; }
+    .sky span:nth-child(8) { left: 92%; top: 34%; font-size: 13px; animation-delay: -1.5s; }
+
+    .card {
+      width: min(100%, 590px);
+      text-align: center;
+      padding: clamp(25px, 6vw, 46px) clamp(20px, 6vw, 48px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 30px;
+      background: var(--paper);
+      box-shadow: 0 18px 60px rgba(169, 111, 160, .18), inset 0 1px 0 white;
+      backdrop-filter: blur(12px);
+      animation: card-in .8s cubic-bezier(.2,.8,.2,1) both;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: .78rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      color: #b26c9a;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      color: #d94f91;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: clamp(2rem, 7vw, 3rem);
+      line-height: 1.12;
+      text-wrap: balance;
+    }
+
+    p {
+      font-size: clamp(.98rem, 2.7vw, 1.08rem);
+      line-height: 1.75;
+      margin: 0 auto 20px;
+    }
+
+    .main-button, .forgive-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 25px;
+      background: linear-gradient(135deg, #ff8fbd, #eaa7ff);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      box-shadow: 0 9px 20px rgba(225, 104, 166, .28);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .main-button:hover, .forgive-button:hover {
+      transform: translateY(-3px) scale(1.035);
+      box-shadow: 0 13px 25px rgba(225, 104, 166, .34);
+      filter: saturate(1.08);
+    }
+    .main-button:active, .forgive-button:active { transform: scale(.96); }
+    button:focus-visible { outline: 3px solid #a986e8; outline-offset: 4px; }
+
+    .intro { min-height: 180px; display: grid; place-content: center; gap: 10px; }
+    .intro .tiny-note { font-size: .9rem; color: #a879a0; margin: 0; }
+    .hidden { display: none !important; }
+
+    .letter {
+      animation: reveal .85s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .letter h1 { animation: pop-in .65s .12s both; }
+    .bear {
+      font-size: clamp(3.6rem, 14vw, 5.4rem);
+      margin: 5px 0 12px;
+      display: inline-block;
+      animation: cuddle 2.2s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    .signature {
+      color: #d94f91;
+      font-weight: 700;
+      margin-top: 18px;
+    }
+    .response {
+      margin: 20px 0 0;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 231, 243, .85);
+      animation: reveal .55s ease both;
+    }
+    .response p { margin: 0; color: #c44486; font-weight: 700; }
+    .hearts-burst {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .burst-heart {
+      position: absolute;
+      bottom: -40px;
+      animation: float-up var(--duration, 3.2s) ease-out forwards;
+      font-size: var(--size, 24px);
+      left: var(--left, 50%);
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(18px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pop-in {
+      0% { opacity: 0; transform: scale(.8); }
+      70% { transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(-7deg); }
+      50% { transform: translateY(-13px) rotate(8deg); }
+    }
+    @keyframes cuddle {
+      0%, 100% { transform: rotate(-4deg) translateY(0); }
+      50% { transform: rotate(4deg) translateY(-5px); }
+    }
+    @keyframes float-up {
+      0% { opacity: 0; transform: translateY(0) rotate(0) scale(.65); }
+      12% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-115vh) rotate(24deg) scale(1.25); }
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 14px; }
+      .card { border-radius: 24px; }
+      .intro { min-height: 160px; }
+      p { line-height: 1.65; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span>♡</span><span>✦</span><span>💗</span><span>✧</span>
+    <span>♡</span><span>✧</span><span>⋆</span><span>♡</span>
+  </div>
+  <div class="hearts-burst" id="heartsBurst" aria-hidden="true"></div>
+
+  <main class="card" aria-live="polite">
+    <section class="intro" id="intro">
+      <p class="eyebrow">A tiny apologize letter for you</p>
+      <button class="main-button" id="openLetter" type="button">Click here, Devasena 💗</button>
+      <p class="tiny-note">I have something from my heart to tell you ✨</p>
+    </section>
+
+    <section class="letter hidden" id="letter">
+      <p class="eyebrow">For my favorite person</p>
+      <h1>I'm Sorry, My Devasena 🥺💗</h1>
+      <div class="bear" aria-label="Cute teddy bear">🧸💗</div>
+      <p>I'm really sorry for falling asleep without informing you 🥹❤️. I never wanted you to feel ignored or make you wait for me. I know I should have told you before sleeping, and I'm sorry I didn't. You mean so much to me, and even when I'm sleepy, you deserve a little message from me. Please forgive your sleepy boy? 🥺💕</p>
+      <p class="signature">You made my day a little more special just by being in it. 🌷🧸💖🧸</p>
+      <button class="forgive-button" id="forgiveButton" type="button">Forgive me? 🥺💕</button>
+      <div class="response hidden" id="response" role="status">
+        <p>Yayyy! 🥹💗 Thank you for forgiving your sleepy boy! Sending you a million hugs and kisses! 🤗💋</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const openLetterButton = document.getElementById("openLetter");
+    const intro = document.getElementById("intro");
+    const letter = document.getElementById("letter");
+    const forgiveButton = document.getElementById("forgiveButton");
+    const response = document.getElementById("response");
+    const heartsBurst = document.getElementById("heartsBurst");
+
+    function releaseHearts(count = 24) {
+      const hearts = ["💗", "💕", "💖", "💞", "♡", "✨"];
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("span");
+        heart.className = "burst-heart";
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.setProperty("--left", `${Math.random() * 100}%`);
+        heart.style.setProperty("--size", `${16 + Math.random() * 22}px`);
+        heart.style.setProperty("--duration", `${2.4 + Math.random() * 2.2}s`);
+        heart.style.animationDelay = `${Math.random() * 0.65}s`;
+        heartsBurst.appendChild(heart);
+        heart.addEventListener("animationend", () => heart.remove(), { once: true });
+      }
+    }
+
+    openLetterButton.addEventListener("click", () => {
+      intro.classList.add("hidden");
+      letter.classList.remove("hidden");
+      releaseHearts(30);
+    });
+
+    forgiveButton.addEventListener("click", () => {
+      if (!response.classList.contains("hidden")) return;
+      response.classList.remove("hidden");
+      forgiveButton.textContent = "Big hugs for you 🤗💗";
+      forgiveButton.disabled = true;
+      forgiveButton.style.opacity = "0.8";
+      releaseHearts(36);
+    });
+  </script>
+</body>
+</html>
